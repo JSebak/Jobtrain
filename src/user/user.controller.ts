@@ -13,6 +13,7 @@ export class UserController{
 
     @Post()
     register(@Body() attr){
+        console.log(attr)
         return this.userService.create(attr);
     }
 }

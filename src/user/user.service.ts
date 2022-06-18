@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Inject, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
 import { validate } from "class-validator";
 import { Repository } from "typeorm";
 import { User } from "./user.entity";
@@ -20,10 +20,11 @@ export class UserService{
     async create(attr: object){
         const newUser = this.userRepository.create(attr)
         const errors = await validate(newUser);
+        console.log("User: ",newUser);
         console.log(attr);
         if(errors.length==0){
             return this.userRepository.save(newUser);
         }
-        return errors;
+        throw new HttpException(errors, HttpStatus.BAD_REQUEST);
     }
 }

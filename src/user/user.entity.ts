@@ -11,9 +11,9 @@ export class User {
     //   @Validate(IsIdAlreadyExistConstrain,{
   //   message:"Id $value already exists"
   // })
-  // @IsIdAlreadyExist({
-  //   message: 'Id $value already exists.'
-  // })
+  @IsIdAlreadyExist({
+    message: 'Id $value already exists.'
+  })
   id: number;
 
   @Column({ length: 250 })
